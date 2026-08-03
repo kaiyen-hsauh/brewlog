@@ -1,0 +1,17 @@
+# This file configures the analyzer, which statically analyzes Dart code to
+# check for errors, warnings, and lints.
+
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  errors:
+    # 因為 l10n.yaml 設定 nullable-getter: false,AppLocalizations.of() 應為 non-null,
+    # 但 analyzer 仍視為 nullable。本專案統一用 ! 顯式標記,這個 lint 為 false positive。
+    unnecessary_non_null_assertion: ignore
+    # l10n 模板字串內用 ${var} 是有意的(placeholders)
+    unnecessary_string_interpolations: ignore
+    # 工具列 deprecated groupValue/onChanged 是 Flutter 3.32 過渡期 API
+    deprecated_member_use: ignore
+
+linter:
+  rules:

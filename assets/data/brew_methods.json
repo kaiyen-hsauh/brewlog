@@ -1,0 +1,12 @@
+[
+  { "id": "v60",         "name_zh": "V60 手沖",     "name_en": "V60",         "ratio": 16, "temp": 93, "grind": "中細", "time": "2:30–3:00", "espresso": false },
+  { "id": "kalita",      "name_zh": "Kalita Wave",  "name_en": "Kalita Wave", "ratio": 15, "temp": 92, "grind": "中細", "time": "3:00–3:30", "espresso": false },
+  { "id": "chemex",      "name_zh": "Chemex",       "name_en": "Chemex",      "ratio": 16, "temp": 94, "grind": "中粗", "time": "4:00–5:00", "espresso": false },
+  { "id": "aeropress",   "name_zh": "Aeropress",    "name_en": "AeroPress",   "ratio": 12, "temp": 85, "grind": "中細", "time": "1:30–2:30", "espresso": false },
+  { "id": "frenchpress", "name_zh": "法式濾壓",     "name_en": "French Press","ratio": 15, "temp": 93, "grind": "粗",   "time": "4:00",       "espresso": false },
+  { "id": "espresso",    "name_zh": "義式濃縮",     "name_en": "Espresso",    "ratio": 2,  "temp": 93, "grind": "極細", "time": "0:25–0:30", "espresso": true  },
+  { "id": "moka",        "name_zh": "摩卡壺",       "name_en": "Moka Pot",    "ratio": 10, "temp": 0,  "grind": "中細", "time": "4:00–5:00", "espresso": false },
+  { "id": "coldbrew",    "name_zh": "冷萃",         "name_en": "Cold Brew",   "ratio": 10, "temp": 0,  "grind": "粗",   "time": "12–24 小時","espresso": false },
+  { "id": "siphon",      "name_zh": "虹吸",         "name_en": "Siphon",      "ratio": 15, "temp": 92, "grind": "中",   "time": "2:00–3:00", "espresso": false },
+  { "id": "other",       "name_zh": "其他",         "name_en": "Other",       "ratio": 16, "temp": 93, "grind": "中",   "time": "—",         "espresso": false }
+]

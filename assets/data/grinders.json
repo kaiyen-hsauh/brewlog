@@ -1,0 +1,74 @@
+[
+  {
+    "id": "comandante_c40",
+    "name": "Comandante C40",
+    "unit_zh": "格",
+    "unit_en": "clicks",
+    "min": 0,
+    "max": 40,
+    "step": 1
+  },
+  {
+    "id": "1zpresso_jx",
+    "name": "1Zpresso JX / JX-Pro",
+    "unit_zh": "格",
+    "unit_en": "clicks",
+    "min": 0,
+    "max": 40,
+    "step": 1
+  },
+  {
+    "id": "1zpresso_k",
+    "name": "1Zpresso K / K-Ultra",
+    "unit_zh": "格",
+    "unit_en": "clicks",
+    "min": 0,
+    "max": 90,
+    "step": 1
+  },
+  {
+    "id": "timemore_c",
+    "name": "Timemore C2 / C3",
+    "unit_zh": "格",
+    "unit_en": "clicks",
+    "min": 0,
+    "max": 36,
+    "step": 1
+  },
+  {
+    "id": "kingrinder_k",
+    "name": "Kingrinder K4/K6",
+    "unit_zh": "格",
+    "unit_en": "clicks",
+    "min": 0,
+    "max": 90,
+    "step": 1
+  },
+  {
+    "id": "fellow_ode",
+    "name": "Fellow Ode Gen 2",
+    "unit_zh": "刻度",
+    "unit_en": "setting",
+    "min": 1,
+    "max": 11,
+    "step": 1
+  },
+  {
+    "id": "baratza_encore",
+    "name": "Baratza Encore",
+    "unit_zh": "刻度",
+    "unit_en": "setting",
+    "min": 1,
+    "max": 40,
+    "step": 1
+  },
+  {
+    "id": "generic",
+    "name": "通用 Generic",
+    "unit_zh": "刻度",
+    "unit_en": "setting",
+    "min": 0,
+    "max": 999,
+    "step": 0.5
+  }
+]
