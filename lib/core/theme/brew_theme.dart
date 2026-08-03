@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 
 /// §9.2 設計系統色彩 token
 /// 原創配色,不可抄 SCA 風味輪。
@@ -17,17 +15,27 @@ class BrewColors {
   static const Color onSurface = Color(0xFF1F2937);
 }
 
-/// §9.3 字級
-/// 最小字級不得小於 12sp (§9.5 強制)。
+/// §9.3 字級 + bundled Noto Sans TC(assets/fonts/),離線 / CI 也完整 render CJK。
 class BrewTypography {
   BrewTypography._();
 
+  static const String fontFamily = 'NotoSansTC';
   static const double timer = 64; // 計時器數字 §F2.1
   static const double pageTitle = 24; // 頁面標題
   static const double sectionTitle = 18; // 區塊標題
   static const double body = 16; // 內文
   static const double caption = 14; // 次要說明
   static const double minReadable = 12; // 不可小於此值
+}
+
+TextStyle _ntc(double size, FontWeight weight, Color color, {List<FontFeature>? features}) {
+  return TextStyle(
+    fontFamily: BrewTypography.fontFamily,
+    fontSize: size,
+    fontWeight: weight,
+    color: color,
+    fontFeatures: features,
+  );
 }
 
 /// §9.2 Material 3 主題(MUST)
@@ -48,6 +56,7 @@ ThemeData buildBrewTheme() {
 
   return ThemeData(
     useMaterial3: true, // §9.2 MUST
+    fontFamily: BrewTypography.fontFamily,
     colorScheme: colorScheme,
     scaffoldBackgroundColor: BrewColors.surface,
     appBarTheme: const AppBarTheme(
@@ -57,39 +66,17 @@ ThemeData buildBrewTheme() {
       centerTitle: false,
     ),
     textTheme: TextTheme(
-      displayLarge: GoogleFonts.notoSansTc(
-        fontSize: BrewTypography.timer,
-        fontWeight: FontWeight.bold,
-        color: BrewColors.onSurface,
-        fontFeatures: const [FontFeature.tabularFigures()],
-      ),
-      headlineMedium: GoogleFonts.notoSansTc(
-        fontSize: BrewTypography.pageTitle,
-        fontWeight: FontWeight.bold,
-        color: BrewColors.onSurface,
-      ),
-      titleLarge: GoogleFonts.notoSansTc(
-        fontSize: BrewTypography.sectionTitle,
-        fontWeight: FontWeight.w600,
-        color: BrewColors.onSurface,
-      ),
-      bodyLarge: GoogleFonts.notoSansTc(
-        fontSize: BrewTypography.body,
-        color: BrewColors.onSurface,
-      ),
-      bodyMedium: GoogleFonts.notoSansTc(
-        fontSize: BrewTypography.body,
-        color: BrewColors.onSurface,
-      ),
-      bodySmall: GoogleFonts.notoSansTc(
-        fontSize: BrewTypography.caption,
-        color: BrewColors.onSurface,
-      ),
+      displayLarge: _ntc(BrewTypography.timer, FontWeight.bold, BrewColors.onSurface, features: const [FontFeature.tabularFigures()]),
+      headlineMedium: _ntc(BrewTypography.pageTitle, FontWeight.bold, BrewColors.onSurface),
+      titleLarge: _ntc(BrewTypography.sectionTitle, FontWeight.w600, BrewColors.onSurface),
+      bodyLarge: _ntc(BrewTypography.body, FontWeight.normal, BrewColors.onSurface),
+      bodyMedium: _ntc(BrewTypography.body, FontWeight.normal, BrewColors.onSurface),
+      bodySmall: _ntc(BrewTypography.caption, FontWeight.normal, BrewColors.onSurface),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         minimumSize: const Size.fromHeight(56), // §S1 CTA
-        textStyle: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+        textStyle: _ntc(17, FontWeight.w600, Colors.white),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),

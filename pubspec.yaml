@@ -34,12 +34,7 @@ dependencies:
   fl_chart: ^0.69.2
 
   # 螢幕常亮(計時器) — §8.2,§F2.1
-  wakelock_plus: ^1.2.10
-
-  # CJK 字型 (Noto Sans TC) — PWA / Web 在 Safari / Linux 上無預設 CJK fallback
-  google_fonts: ^6.2.1
-
-  # 震動 — §8.2 / S3 計時器用
+  wakelock_plus: ^1.2.10 S3 計時器用
   # S0 暫不安裝:該套件未支援 Swift Package Manager,S3 改用 HapticFeedback 先頂著
 
   # 照片 — §8.2
@@ -67,6 +62,13 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: NotoSansTC
+      fonts:
+        - asset: assets/fonts/NotoSansTC-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/NotoSansTC-Bold.ttf
+          weight: 700
   generate: true
   assets:
     - assets/data/
