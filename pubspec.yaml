@@ -34,7 +34,7 @@ dependencies:
   fl_chart: ^0.69.2
 
   # 螢幕常亮(計時器) — §8.2,§F2.1
-  wakelock_plus: ^1.2.10 S3 計時器用
+  wakelock_plus: ^1.2.10
   # S0 暫不安裝:該套件未支援 Swift Package Manager,S3 改用 HapticFeedback 先頂著
 
   # 照片 — §8.2
