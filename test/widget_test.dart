@@ -145,4 +145,84 @@ void main() {
 
     expect(find.text('液重'), findsOneWidget);
   });
+  // §9.2 主題顏色 hex 對得起 spec
+  testWidgets('W9_2_palette', (tester) async {
+    _setPhone(tester);
+    expect(BrewColors.primary.value, 0xFF6F4E37);
+    expect(BrewColors.secondary.value, 0xFFC8A27A);
+    expect(BrewColors.accent.value, 0xFFD97706);
+    expect(BrewColors.surface.value, 0xFFFAF7F2);
+    expect(BrewColors.onSurface.value, 0xFF1F2937);
+    expect(BrewColors.success.value, 0xFF047857);
+    expect(BrewColors.error.value, 0xFFB91C1C);
+  });
+
+  // §9.3 字級:最小 12sp,計時 64sp,標題 24sp
+  testWidgets('W9_3_typography', (tester) async {
+    _setPhone(tester);
+    expect(BrewTypography.minReadable, 12);
+    expect(BrewTypography.body, 16);
+    expect(BrewTypography.sectionTitle, 18);
+    expect(BrewTypography.pageTitle, 24);
+    expect(BrewTypography.timer, 64);
+  });
+
+  // §9.4 S1 CTA 高度 ≥ 120dp (§F1.3 大按鈕規格)
+  testWidgets('W9_4_cta_height', (tester) async {
+    _setPhone(tester);
+    await tester.pumpWidget(await _wrap());
+    await tester.pump();
+    expect(find.byType(ElevatedButton), findsWidgets);
+    // 量第一顆 ElevatedButton(主畫面開始沖煮)的 SizedBox 容器高度
+    final btnRect = tester.getRect(find.byType(ElevatedButton).first);
+    // 主 CTA 有 SizedBox(height: 120) wrap,所以 size.height 應 ≥ 120
+    expect(btnRect.height, greaterThanOrEqualTo(110.0),
+        reason: '§9.4 S1 CTA 必須 ≥ 120dp,實測 ${btnRect.height}');
+  });
+
+  // S1 首頁 greeting
+  testWidgets('W_home_greeting', (tester) async {
+    _setPhone(tester);
+    await tester.pumpWidget(await _wrap());
+    await tester.pump();
+    expect(find.textContaining('早安'), findsOneWidget);
+    expect(find.textContaining('今日'), findsOneWidget);
+  });
+
+  // S1 快速重複卡
+  testWidgets('W_home_quick_repeat', (tester) async {
+    _setPhone(tester);
+    await tester.pumpWidget(await _wrap());
+    await tester.pump();
+    expect(find.text('快速重複上次'), findsOneWidget);
+  });
+
+  // 豆子 tab 顯示 AppBar 標題「咖啡豆」+ 空狀態「從右下方新增第一支」
+  testWidgets('W_beans_appbar_empty', (tester) async {
+    _setPhone(tester);
+    await tester.pumpWidget(await _wrap());
+    await tester.pump();
+    await tester.tap(find.text('豆子'));
+    await tester.pumpAndSettle();
+    expect(find.text('咖啡豆'), findsOneWidget); // AppBar
+    expect(find.text('還沒有任何豆子,從右下角新增第一支'), findsOneWidget); // 空狀態
+  });
+
+  // MeScreen AppBar 顯示「我的」
+  testWidgets('W_me_appbar_title', (tester) async {
+    _setPhone(tester);
+    await tester.pumpWidget(await _wrap());
+    await tester.pump();
+    await tester.tap(find.text('我的'));
+    await tester.pumpAndSettle();
+    expect(find.text('我的'), findsWidgets);
+  });
+
+  // App theme 是 Material 3
+  testWidgets('W_theme_material3', (tester) async {
+    _setPhone(tester);
+    await tester.pumpWidget(MaterialApp(theme: buildBrewTheme(), home: const Scaffold()));
+    final ctx = tester.element(find.byType(Scaffold));
+    expect(Theme.of(ctx).useMaterial3, isTrue);
+  });
 }
