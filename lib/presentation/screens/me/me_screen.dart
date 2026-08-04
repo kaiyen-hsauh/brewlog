@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:brewlog/core/theme/brew_theme.dart';
 import 'package:brewlog/core/constants/grinders.dart';
 import 'package:brewlog/application/providers/providers.dart';
+import 'package:brewlog/application/providers/locale_provider.dart';
 import 'package:brewlog/domain/entities/entities.dart';
 import 'package:brewlog/l10n/gen/app_localizations.dart';
 import 'package:brewlog/presentation/screens/paywall/paywall_screen.dart';
@@ -117,11 +118,7 @@ class _MeScreenState extends ConsumerState<MeScreen> {
             ),
           ]),
           _section(l.meSettings, [
-            ListTile(
-              leading: const Icon(Icons.language),
-              title: Text(l.meLanguage),
-              subtitle: const Text('繁體中文 · English (iOS 系統設定)'),
-            ),
+            _buildLanguageTile(context, l),
             const ListTile(
               leading: Icon(Icons.tune),
               title: Text('單位'),
@@ -170,6 +167,49 @@ class _MeScreenState extends ConsumerState<MeScreen> {
         'scale' => Icons.scale,
         _ => Icons.settings_input_component,
       };
+
+  /// §10 MUST:語言切換 (跟隨系統 / 繁中 / English),持久化到 SharedPreferences
+  Widget _buildLanguageTile(BuildContext context, AppLocalizations l) {
+    final localeController = LocaleScope.of(context);
+    final current = localeController.value;
+    final groupVal =
+        current == null ? '' : (current.languageCode == 'en' ? 'en' : 'zh_TW');
+
+    void pick(Locale? locale) {
+      localeController.value = locale;
+      LocalePersistence.persist(locale);
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        ListTile(
+          leading: const Icon(Icons.language),
+          title: Text(l.meLanguage),
+        ),
+        RadioListTile<String>(
+          title: const Text('跟隨系統'),
+          value: '',
+          groupValue: groupVal,
+          onChanged: (_) => pick(null),
+        ),
+        RadioListTile<String>(
+          title: const Text('繁體中文'),
+          subtitle: const Text('zh-TW'),
+          value: 'zh_TW',
+          groupValue: groupVal,
+          onChanged: (_) => pick(const Locale('zh', 'TW')),
+        ),
+        RadioListTile<String>(
+          title: const Text('English'),
+          subtitle: const Text('en'),
+          value: 'en',
+          groupValue: groupVal,
+          onChanged: (_) => pick(const Locale('en')),
+        ),
+      ],
+    );
+  }
 
   Widget _section(String title, List<Widget> children) {
     return Padding(

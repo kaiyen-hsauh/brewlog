@@ -7,6 +7,8 @@ import 'package:path_provider_platform_interface/path_provider_platform_interfac
 
 import 'package:brewlog/app.dart';
 import 'package:brewlog/data/datasources/local/hive_setup.dart';
+import 'package:brewlog/application/providers/locale_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:brewlog/core/constants/brew_methods.dart';
 import 'package:brewlog/core/constants/grinders.dart';
 import 'package:brewlog/core/theme/brew_theme.dart';
@@ -24,7 +26,11 @@ class _FakePathProvider extends PathProviderPlatform {
 }
 
 Future<Widget> _wrap() async {
-  return const ProviderScope(child: BrewLogApp());
+  SharedPreferences.setMockInitialValues({'app.locale': 'zh_TW'});
+  final initial = await loadInitialLocale();
+  return ProviderScope(
+    child: BrewLogApp(localeController: LocaleController(initial)),
+  );
 }
 
 Future<void> _setUpHive() async {
